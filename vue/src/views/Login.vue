@@ -1,8 +1,7 @@
 <template>
     <div>
         <Header></Header>
-        <login-user></login-user>
-        dfg
+        <login-user></login-user>       
     </div>
 </template>
 
