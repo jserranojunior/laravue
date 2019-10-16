@@ -1,6 +1,36 @@
 <template>
 <div>
-    <v-card class="mx-auto" max-width="500">
+    <v-app id="inspire">
+        <v-content>
+            <v-container fluid > 
+                <!-- fill-height -->
+                <v-layout align-center justify-center>
+                    <v-flex xs12 sm8 md4>
+                        <v-card class="elevation-12">
+                            <p v-if="auth.user.id">Você está logado</p>
+                            <v-toolbar color="primary" dark flat>
+                                <v-toolbar-title>Login</v-toolbar-title>
+                                <v-spacer></v-spacer>
+                            </v-toolbar>
+                            <v-card-text>
+                                <v-form>
+                                    <v-icon>mdi-account</v-icon> <v-text-field label="Login" v-model="inputs.email" name="login" type="text"></v-text-field>
+
+                                    <v-icon>mdi-lock</v-icon><v-text-field id="password" v-model="inputs.password" label="Password" name="password" type="password"></v-text-field>
+                                </v-form>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn v-if="!auth.user.id" @click="logar()" color="primary">Login</v-btn>
+                                <v-btn v-if="auth.user.id" @click="logout()" color="pink">Sair</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+    </v-app>
+    <!-- <v-card class="mx-auto" max-width="500">
         <v-card-title class="display-1">
           Login
         </v-card-title>
@@ -25,7 +55,7 @@
                 DESLOGAREMOS
             </v-btn>
         </v-card-actions>
-    </v-card>
+    </v-card> -->
 
 </div>
 </template>
@@ -42,58 +72,36 @@ export default {
     data() {
         return {
             //  urlApi: process.env.LARAVEL_APP_API_URL,
-            appTitle: process.env.VUE_APP_TITLE,
-            apiUrl: process.env.VUE_APP_LARAVEL_API_URL,
-            email: "jorgeserranojunior@gmail.com",
-            password: "sondeminas",
+            appTitle: process.env.VUE_APP_TITLE,            
+            inputs:{},
+           
         }
     },
     mounted() {
-        this.getToken()
+        // this.getToken()
+    },
+    beforeMount(){
+        this.confirmAuthenticated()
+        this.inputs.email = "jorgeserranojunior@gmail.com"
+        this.inputs.password = "sondeminas"
     },
     computed: {
         ...mapState({
-            auth: state => state,
+            auth: state => state.Auth,
         })
     },
     methods: {
         ...mapActions([
-            'setToken',
+            'login',
             'destroyToken',
             'getToken',
+            'user',
+            'confirmAuthenticated',
+            'logout'
         ]),
-        puxarDados() {
-            let url = this.apiUrl + 'apiteste'
-
-            axios({
-                    method: 'get',
-                    url: url,
-                    responseType: 'stream'
-                })
-                .then(function (response) {
-                    // eslint-disable-next-line
-                    console.log(response.data)
-                });
-        },
-        logar() {
-            let $this = this
-            axios({
-                    method: 'post',
-                    url: 'http://localhost:8000/oauth/token',
-                    data: {
-                        client_id: 2,
-                        client_secret: 'DGABP1rGMt7Ep5aT42InyeLQw0lzRY3aSQkACnZf',
-                        grant_type: 'password',
-                        username: this.email,
-                        password: this.password,
-                    }
-                })
-                .then(function (response) {
-                    $this.setToken(response.data)
-                    // eslint-disable-next-line
-                    console.log(response)
-
-                });
+        
+        logar() {            
+            this.login(this.inputs)
         }
 
     }

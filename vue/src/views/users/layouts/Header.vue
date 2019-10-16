@@ -6,10 +6,8 @@
     tile
   >
     <v-toolbar dense>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
       <v-toolbar-title>LARAVUE</v-toolbar-title>
-
       <v-spacer></v-spacer>
         <router-link to="/home">
             <v-btn icon>
