@@ -1,14 +1,13 @@
 <template>
 <div>
-    
+
     <v-app id="inspire">
         <v-content>
             <v-container fluid>
                 <!-- fill-height -->
                 <v-layout align-center justify-center>
                     <v-flex xs12 sm8 md4>
-                        
-                        <v-card class="elevation-12">                           
+                        <v-card class="elevation-12">
                             <v-toolbar color="primary" dark flat>
                                 <v-toolbar-title>Login</v-toolbar-title>
                                 <v-spacer></v-spacer>
@@ -21,7 +20,7 @@
                                     <v-text-field id="password" v-model="inputs.password" label="Password" name="password" type="password"></v-text-field>
                                 </v-form>
                             </v-card-text>
-                            <v-card-actions>                                
+                            <v-card-actions>
                                 <v-alert v-show="auth.error.message" border="top" color="red lighten-2" dark>
                                     {{auth.error.message}}
                                 </v-alert>
@@ -42,7 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import {
     mapState,
     mapActions
@@ -55,17 +53,14 @@ export default {
             //  urlApi: process.env.LARAVEL_APP_API_URL,
             appTitle: process.env.VUE_APP_TITLE,
             inputs: {},
-            
-            status:"",
-
+            status: "",
         }
     },
     mounted() {
-        this.token = localStorage.getItem('token')
-        if(this.auth.user.id){
-            this.$router.push({ path: 'dashboard' })
-        }
-        
+        if (localStorage.getItem('token')) {
+            this.token = localStorage.getItem('token')          
+                this.loginRedirect()                
+            }
     },
     beforeMount() {
         this.confirmAuthenticated()
@@ -76,33 +71,29 @@ export default {
         ...mapState({
             auth: state => state.Auth,
             idUser: state => state.Auth.user.id,
+            typeUser: state => state.Auth.user.type,
         })
     },
     methods: {
         ...mapActions([
-            'login',
-            'destroyToken',
-            'getToken',
-            'user',
+            'login',            
             'confirmAuthenticated',
             'logout'
         ]),
-
+        loginRedirect() {            
+            if (this.typeUser) {
+                this.$router.push({
+                    name: this.auth.user.type
+                })
+            }           
+        },
         logar() {
             this.login(this.inputs)
         }
     },
-    watch: {
-        token() {   
-            if(this.token > ''){
-                this.idUser = this.auth.user.id 
-            }      
-            
-        },
-        idUser(){
-        if(this.idUser){                      
-                this.$router.push({ path: 'dashboard' })         
-            }
+    watch: {           
+        typeUser() { 
+            this.loginRedirect()                          
         }
     },
 }

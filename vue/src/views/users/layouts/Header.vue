@@ -58,22 +58,28 @@ import {
         })
     },
     mounted(){
-      
-      if(!this.auth.user.id){
-        this.$router.push({ path: 'login' })
-      }
+      if(!this.idUser){ 
+        console.log('esse')       
+        this.loginRedirect()
+      }   
+      //colocar a verficação de login em outro lugar   
       },
       methods:{
          ...mapActions([            
             'logout'
         ]),
+        loginRedirect(){        
+          if(!this.idUser){
+            
+            this.$router.push({ name: 'login' })
+          }
+        }
       },
       watch:{        
         idUser(){
-        if(!this.idUser){                      
-                this.$router.push({ path: 'login' })         
-            }
-        }
+          
+        this.loginRedirect()
+      }
       }
     }
 </script>

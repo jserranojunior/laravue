@@ -5,29 +5,44 @@ import Login from './views/Login'
 import About from './views/About'
 import Dashboard from './views/users/Dashboard'
 
+// import { AclRule } from 'vue-acl'
+
 Vue.use(Router)
 
 export default new Router({
-  routes: [
+  routes: [    
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        rule: 'isPublic'
+      }
     },
     {
       path: '/about',
-      name: 'about',
-      component: About
+      name: 'user',
+      component: About,
+      meta: {
+        rule: 'isUser'
+      }
     },
     {
       path: '/login',
       name: 'login',      
-      component: Login
+      component: Login,
+      meta: {
+        rule: 'isPublic'
+      }
     },
     {
       path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard
+      name: 'admin',
+      component: Dashboard,
+      meta: {
+        rule: 'isAdmin'
+      }
+      
     },
 
   ]

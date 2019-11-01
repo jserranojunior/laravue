@@ -5,9 +5,12 @@ export default {
         // register:{},
         // message:"",
         user:{},
-        error:{},      
-    },
-    mutations: {        
+        error:{},  
+     
+  
+    
+    }, 
+       mutations: {        
         USER(state, user){
             state.user = user
         },       
@@ -23,13 +26,22 @@ export default {
         },
         LOGOUT(state){
             state.user = {}
+            state.auth = {}
         }
     },
     actions: {
         logout({commit}){
-            localStorage.removeItem("token");    
+            try{
+                localStorage.removeItem("token");    
             localStorage.removeItem("expiration");   
+            localStorage.removeItem("type"); 
             commit('LOGOUT') 
+            }catch(error) {
+                // eslint-disable-next-line
+                console.log(error)
+                commit('ERROR', error.response.data)                
+            } 
+            
         },
         login({commit, dispatch}, data){
             let urlApi = process.env.VUE_APP_LARAVEL_API_URL
@@ -52,9 +64,10 @@ export default {
                     dispatch('user');
                   })
             }).catch(function (error) {
+                // eslint-disable-next-line
                 console.log(error.response.data)
                 commit('ERROR', error.response.data)                
-            });     
+            })    
             
         },
         user({commit}){
@@ -70,12 +83,14 @@ export default {
             })
             .then(function (response) {
                 commit('USER', response.data)
+                localStorage.setItem('type', response.data.type); 
             }).catch(error => {
-                console.log(error.response + 'erro loco')
+                // eslint-disable-next-line
+                console.log(error.response)
             });
         },
-        getToken({commit},){
-            return new Promise((resolve, reject) => {
+        getToken(){
+            return new Promise((resolve) => {
                 setTimeout(() => {
                     let data = {};
                     data.token = localStorage.getItem('token')
@@ -89,7 +104,6 @@ export default {
                 dispatch('user');
             }
         },      
-        destroyToken(context) {                          
-        },        
+             
     }
 }
