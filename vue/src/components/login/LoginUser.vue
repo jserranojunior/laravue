@@ -1,10 +1,51 @@
 <template>
 <div>
+    <div class="content-wrapper" style="min-height: 176px;">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Dashboard</h1>
+                    </div><!-- /.col -->
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header border-0">
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="card-title">Sei la</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
 
-    <v-app id="inspire">
+                                <input type="text" class="form-control" v-model="inputs.email">
+                                <input type="password" class="form-control" v-model="inputs.password">
+
+                                <button v-if="!auth.user.id" class="btn btn-block btn-primary btn-sm" @click="logar()">
+                                    Login
+                                </button>
+                            </div>
+                            <div v-if="auth.user.id" class="btn btn-block btn-danger btn-sm" @click="logout()">
+                                Sair
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- <v-app id="inspire">
         <v-content>
-            <v-container fluid>
-                <!-- fill-height -->
+            <v-container fluid>   
                 <v-layout align-center justify-center>
                     <v-flex xs12 sm8 md4>
                         <v-card class="elevation-12">
@@ -36,8 +77,8 @@
                 </v-layout>
             </v-container>
         </v-content>
-    </v-app>
-</div>
+    </v-app> -->
+<!-- </div> -->
 </template>
 
 <script>
@@ -58,9 +99,9 @@ export default {
     },
     mounted() {
         if (localStorage.getItem('token')) {
-            this.token = localStorage.getItem('token')          
-                this.loginRedirect()                
-            }
+            this.token = localStorage.getItem('token')
+            this.loginRedirect()
+        }
     },
     beforeMount() {
         this.confirmAuthenticated()
@@ -76,24 +117,24 @@ export default {
     },
     methods: {
         ...mapActions([
-            'login',            
+            'login',
             'confirmAuthenticated',
             'logout'
         ]),
-        loginRedirect() {            
+        loginRedirect() {
             if (this.typeUser) {
                 this.$router.push({
                     name: this.auth.user.type
                 })
-            }           
+            }
         },
         logar() {
             this.login(this.inputs)
         }
     },
-    watch: {           
-        typeUser() { 
-            this.loginRedirect()                          
+    watch: {
+        typeUser() {
+            this.loginRedirect()
         }
     },
 }

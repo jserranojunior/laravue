@@ -27,6 +27,6 @@ export default new AclCreate({
       acl.change('public') 
     }
     
- console.log('store')
+
   }
 })
