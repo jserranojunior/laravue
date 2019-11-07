@@ -3,14 +3,16 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login'
 import About from './views/About'
-import Dashboard from './views/users/Dashboard'
+import Dashboard from './views/admin/Dashboard'
+import AboutAdmin from './views/admin/About'
 
 // import { AclRule } from 'vue-acl'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [    
+  mode: 'history',
+  routes: [     
     {
       path: '/',
       name: 'home',
@@ -36,13 +38,21 @@ export default new Router({
       }
     },
     {
-      path: '/dashboard',
+      path: '/admin/dashboard',
       name: 'admin',
       component: Dashboard,
       meta: {
         rule: 'isAdmin'
       }
       
+    },
+    {
+      path: '/admin/about',
+      name: 'about',
+      component: AboutAdmin,
+      meta: {
+        rule: 'isAdmin'
+      }
     },
 
   ]

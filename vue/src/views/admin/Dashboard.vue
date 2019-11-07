@@ -1,12 +1,12 @@
 <template>
     <div>
-        <Header/>
-        Dashboard
+        <HeaderAdmin/>
+        Dashboard ADMIN
     </div>
 </template>
 
 <script>
-import Header from './layouts/Header'
+import HeaderAdmin from './layouts/HeaderAdmin'
     export default {
         name:"Dashboard",
         data(){
@@ -15,7 +15,7 @@ import Header from './layouts/Header'
             }
         },
         components:{
-            Header,
+            HeaderAdmin,
         },
     }
 </script>
