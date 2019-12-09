@@ -1,8 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Login from './views/Login'
-import About from './views/About'
+
+// ROTAS PUBLICAS
+import Home from './views/public/Home.vue'
+import Login from './views/public/Login'
+
+// ROTAS USUARIOS
+import About from './views/users/About'
+
+// ROTAS ADMINISTRADOR
 import Dashboard from './views/admin/Dashboard'
 import AboutAdmin from './views/admin/About'
 
@@ -40,6 +46,15 @@ export default new Router({
     {
       path: '/admin/dashboard',
       name: 'admin',
+      component: Dashboard,
+      meta: {
+        rule: 'isAdmin'
+      }
+      
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
       component: Dashboard,
       meta: {
         rule: 'isAdmin'

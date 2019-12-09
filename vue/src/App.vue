@@ -19,11 +19,12 @@ export default {
         })
     },
   mounted(){
-    if (!this.idUser) {            
-            this.loginRedirect()
-        } 
+    this.confirmAuthenticated()
   },
-  methods: {        
+  methods: {      
+      ...mapActions([
+            'confirmAuthenticated',
+      ]),  
         loginRedirect() {
             if (!this.idUser) {
                 this.$router.push({

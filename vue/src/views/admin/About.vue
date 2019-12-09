@@ -1,16 +1,23 @@
 <template>
   <div class="about">
-      <Header></Header>
+      <HeaderAdmin>
+       <template v-slot:titlepage>
+            ABOUT         
+        </template>
+      </HeaderAdmin>
     <h1>ABOUT ADMIN</h1>
   </div>
 </template>
 <script>
 
-     import Header from '@/views/admin/layouts/HeaderAdmin.vue'
+     import HeaderAdmin from '@/views/admin/layouts/LayoutAdmin.vue'
     export default {
         name:"About",
         components:{           
-            Header,
+            HeaderAdmin,
         }
     }
 </script>
+<style>
+
+</style>

@@ -1,49 +1,39 @@
 <template>
 <div>
-    <div class="content-wrapper" style="min-height: 176px;">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">LOGIN</h1>
-                    </div><!-- /.col -->
-                </div>
-            </div>
-        </div>
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="card">
-                            <div class="card-header border-0">
-                                <div class="d-flex justify-content-between">
-                                    
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <div class="d-flex justify-content-between">
+                                <h1 class="m-0 text-dark">LOGIN</h1>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <input type="text" class="form-control" v-model="inputs.email"> <br>
+                            <input type="password" class="form-control" v-model="inputs.password"><br>
+
+                            <div class="row justify-content-end">
+                                <div class="col-3">
+                                    <button v-if="!auth.user.id" class="btn btn-block btn-primary btn-sm" @click="logar()">
+                                        Login
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="card-body">
-
-                                <input type="text" class="form-control" v-model="inputs.email"> <br>
-                                <input type="password" class="form-control" v-model="inputs.password"><br>
-
-                                <button v-if="!auth.user.id" class="btn btn-block btn-primary btn-sm" @click="logar()">
-                                    Login
-                                </button> 
-                            </div>
-                            <div v-if="auth.user.id" class="btn btn-block btn-danger btn-sm" @click="logout()">
-                                Sair
                             </div>
 
                         </div>
+                        <div v-if="auth.user.id" class="btn btn-block btn-danger btn-sm" @click="logout()">
+                            Sair
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-
-
 </template>
 
 <script>
@@ -70,7 +60,7 @@ export default {
     },
     beforeMount() {
         this.confirmAuthenticated()
-        this.inputs.email = "jorgeserranojunior@gmail.coms"
+        this.inputs.email = "jorgeserranojunior@gmail.com"
         this.inputs.password = "sondeminas"
     },
     computed: {
