@@ -8153,6 +8153,11 @@ vue-script-component@^0.1.7:
   resolved "https://registry.yarnpkg.com/vue-script-component/-/vue-script-component-0.1.7.tgz#c322bd01722c6487aac892cb4f6a7bc976ca664f"
   integrity sha512-TVYTzxTlhw2fzJ6mkorwNi7nW6Be1vxX+V2ELAG58OdqZdtvIhBHOOaE5izo2TuSgJpkaOfU25IWHcXaUsWToA==
 
+vue-script2@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/vue-script2/-/vue-script2-2.1.0.tgz#8e480dc6052c8cdf2aa0ec112efc80f31ddc3522"
+  integrity sha512-EDUOjQBFvhkJXwmWuUR9ijlF7/4JtmvjXSKaHSa/LNTMy9ltjgKgYB68aqlxgq8ORdSxowd5eo24P1syjZJnBA==
+
 vue-style-loader@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
@@ -8432,9 +8437,9 @@ write@^0.2.1:
     mkdirp "^0.5.1"
 
 ws@^6.0.0, ws@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"
-  integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.2.tgz#dd5cdbd57a9979916097652d78f1cc5faea0c32e"
+  integrity sha512-zmhltoSR8u1cnDsD43TX59mzoMZsLKqUweyYBAIvTngR3shc0W6aOZylZmq/7hqyVxPdi+5Ud2QInblgyE72fw==
   dependencies:
     async-limiter "~1.0.0"
 
